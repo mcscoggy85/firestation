@@ -29,7 +29,7 @@ export default class NavFire extends React.Component {
                                 <NavLink href="/status">Status</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/openvpn">OpenVPN</NavLink>
+                                <NavLink href="/vpn">VPN</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/firewall">Firwall</NavLink>

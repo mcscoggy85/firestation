@@ -1,4 +1,5 @@
 import React from 'react';
+import FSTable from '../../FireStationTable/FSTable';
 import { 
     Row,
     Container,
@@ -10,7 +11,7 @@ import {
     CardTitle
  } from 'reactstrap';
 
- const StatusCard = ({cardId, statusName, statusDescription, statusButton}) => {
+ const StatusCard = ({cardId, statusName, statusDescription, statusButton, tableProps}) => {
      return(
          <div>
             <Container id={ cardId } className="mt-2">
@@ -20,6 +21,7 @@ import {
                             <CardBody>
                                 <CardTitle >{ statusName }</CardTitle>
                                 <CardText>{ statusDescription }</CardText>
+                                 <FSTable { ...tableProps } />
                                 {/* <Button className='status-btn' color="info">View More</Button> */}
                                 {statusButton}
                             </CardBody>
