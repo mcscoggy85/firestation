@@ -9,14 +9,15 @@ class Stats extends React.Component {
         super();
 
         this.state = {
-            data : {}
+            data : {},
+            ready : false
         }
     }
 
     serverData = () => {
         axios.get('http://localhost:3001/status')
             .then(res => {
-                this.setState({data : res.data}, () => console.log(this.state.data));
+                this.setState({data : res.data, ready : true}, () => console.log(this.state.data));
             }).catch(err => console.log(err))
     };
 
@@ -31,13 +32,17 @@ class Stats extends React.Component {
 
 
     render() {
+        if (!this.state.ready){
+            return 'Loading...'
+        }
         return (
             <div>
                 <StatusCard statusName='Over View Status'
                             statusDescription='To view the Overall STATUS of the device please click "View More" below.'
                             cardId='over-view-status'
-                            statusButton={<button>Somthing</button>}
-                    tableProps={ this.data.systemInfo.interfaceInfo }/>
+                            // statusButton={<button>Somthing</button>}
+                            interfaceInfo={ this.state.data.systemInfo.interfaceInfo }
+                            deviceInfo={ this.state.data.systemInfo }/>
             </div>
         );
     }

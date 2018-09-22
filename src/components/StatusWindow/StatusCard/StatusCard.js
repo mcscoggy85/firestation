@@ -1,5 +1,5 @@
 import React from 'react';
-import FSTable from '../../FireStationTable/FSTable';
+import NetInfo from '../../FireStationTable/FSTables/NetInfoTable';
 import { 
     Row,
     Container,
@@ -11,9 +11,17 @@ import {
     CardTitle
  } from 'reactstrap';
 
- const StatusCard = ({cardId, statusName, statusDescription, statusButton, tableProps}) => {
-     return(
-         <div>
+ const StatusCard = ({cardId, statusName, statusDescription, interfaceInfo}) => {
+    const interfaces = interfaceInfo[0]
+
+    const rows = Object.keys(interfaces).map((interfaceName)=>{
+        const info = interfaces[interfaceName][0];
+        info.interface = interfaceName;
+        return info;
+        
+    });
+
+    return (
             <Container id={ cardId } className="mt-2">
                 <Row>
                     <Col md="8">
@@ -21,16 +29,16 @@ import {
                             <CardBody>
                                 <CardTitle >{ statusName }</CardTitle>
                                 <CardText>{ statusDescription }</CardText>
-                                 <FSTable { ...tableProps } />
-                                {/* <Button className='status-btn' color="info">View More</Button> */}
-                                {statusButton}
+                                <NetInfo rows={ rows } />
                             </CardBody>
                         </Card>
                     </Col>
                 </Row>
             </Container>
-         </div>
-     );
+    )
+    //  return(
+    
+    //  );
  }
 
  export default StatusCard;
