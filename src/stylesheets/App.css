@@ -5,3 +5,7 @@
 .status-btn {
   display: flex;
 }
+
+.statsCard {
+  justify-content: flex-start;
+}

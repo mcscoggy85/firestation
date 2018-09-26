@@ -26,7 +26,7 @@ class Stats extends React.Component {
         this.serverData();
     }
 
-    componenWillUnmount() {
+    componentWillUnmount() {
         clearInterval(this.timer)
     }
 
@@ -36,9 +36,9 @@ class Stats extends React.Component {
             return 'Loading...'
         }
         return (
-            <div>
+            <div className='statsCard'>
                 <StatusCard statusName='Over View Status'
-                            statusDescription='To view the Overall STATUS of the device please click "View More" below.'
+                            statusDescription='This is the overall status of the device.'
                             cardId='over-view-status'
                             // statusButton={<button>Somthing</button>}
                             interfaceInfo={ this.state.data.systemInfo.interfaceInfo }

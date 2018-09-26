@@ -12,12 +12,11 @@ const NetInfo = (props)=> {
                 <td>{ row.netmask }</td>
                 <td>{ row.mac }</td>
             </tr>
-        )
+        );
     });
     
-    console.log(props)
+    // console.log(props)
     return(
-        <div>
             <Table dark responsive>
                 <thead>
                     <tr>
@@ -31,8 +30,7 @@ const NetInfo = (props)=> {
                     { info } 
                 </tbody>
             </Table>
-        </div>
-    )
-}
+    );
+};
 
 export default NetInfo; 
