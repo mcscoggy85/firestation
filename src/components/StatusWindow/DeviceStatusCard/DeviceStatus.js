@@ -1,6 +1,6 @@
 import React from 'react';
-import NetInfo from '../../FireStationTable/FSTables/NetInfoTable';
-import DeviceInfo from '../../FireStationTable/FSTables/DeviceInfoTable'
+import NetInfo from '../../FireStationTable/FSTables/NetworkInfo/NetInfoTable';
+import DeviceInfo from '../../FireStationTable/FSTables/DeviceInfo/DeviceInfoTable'
 import { 
     Row,
     Container,
@@ -12,7 +12,7 @@ import {
     CardTitle
  } from 'reactstrap';
 
- const StatusCard = ({cardId, statusName, statusDescription, interfaceInfo, deviceInfo}) => {
+ const DeviceStatusCard = ({cardId, statusName, statusDescription, interfaceInfo, deviceInfo}) => {
     const interfaces = interfaceInfo[0]
 
     const rows = Object.keys(interfaces).map((interfaceName)=>{
@@ -41,4 +41,4 @@ import {
     );
  }
 
- export default StatusCard;
+ export default DeviceStatusCard;

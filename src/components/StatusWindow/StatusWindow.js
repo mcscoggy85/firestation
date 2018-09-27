@@ -1,6 +1,7 @@
 import React from 'react';
-import StatusCard from './StatusCard/StatusCard.js'
-import axios from 'axios'
+import DeviceStatusCard from './DeviceStatusCard/DeviceStatus';
+import ServiceStats from './ServiceStatsCard/ServiceStats';
+import axios from 'axios';
 
 
 
@@ -11,24 +12,24 @@ class Stats extends React.Component {
         this.state = {
             data : {},
             ready : false
-        }
-    }
+        };
+    };
 
     serverData = () => {
         axios.get('http://localhost:3001/status')
             .then(res => {
                 this.setState({data : res.data, ready : true}, () => console.log(this.state.data));
-            }).catch(err => console.log(err))
+            }).catch(err => console.log(err));
     };
 
     componentDidMount() {
         // this.timer = setInterval(this.serverData, 3000);
         this.serverData();
-    }
+    };
 
     componentWillUnmount() {
         clearInterval(this.timer)
-    }
+    };
 
 
     render() {
@@ -37,15 +38,16 @@ class Stats extends React.Component {
         }
         return (
             <div className='statsCard'>
-                <StatusCard statusName='Over View Status'
+                <DeviceStatusCard statusName='Device Overview'
                             statusDescription='This is the overall status of the device.'
                             cardId='over-view-status'
                             // statusButton={<button>Somthing</button>}
                             interfaceInfo={ this.state.data.systemInfo.interfaceInfo }
                             deviceInfo={ this.state.data.systemInfo }/>
+                {/* <ServiceStats /> */}
             </div>
         );
-    }
+    };
 
 };
 
