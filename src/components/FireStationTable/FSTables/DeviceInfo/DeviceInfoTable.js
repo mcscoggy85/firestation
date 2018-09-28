@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table } from 'reactstrap';
 import CpuInfoTable from './CpuInfo';
 import UpTimeInfo from './UpTimeInfo';
 import HostInfo from './HostInfo';

@@ -14,9 +14,9 @@ const CpuInfoTable = ({ldAvg}) => {
             <thead>
             <tr>
                 <th>CPU INFO</th>
+                <th>1 Min</th>
                 <th>5 Min</th>
                 <th>15 Min</th>
-                <th>30 Min</th>
             </tr>
           </thead>
           <tbody>

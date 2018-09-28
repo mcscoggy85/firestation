@@ -1,6 +1,6 @@
 import React from 'react';
-import DeviceStatusCard from './DeviceStatusCard/DeviceStatus';
-import ServiceStats from './ServiceStatsCard/ServiceStats';
+import DeviceStatus from './DeviceStatusCard/DeviceStatus';
+import ServiceStats from './ServiceStatsCard/ServiceStatus';
 import axios from 'axios';
 
 
@@ -38,13 +38,16 @@ class Stats extends React.Component {
         }
         return (
             <div className='statsCard'>
-                <DeviceStatusCard statusName='Device Overview'
+                <DeviceStatus statusName='Device Overview'
                             statusDescription='This is the overall status of the device.'
                             cardId='over-view-status'
                             // statusButton={<button>Somthing</button>}
                             interfaceInfo={ this.state.data.systemInfo.interfaceInfo }
                             deviceInfo={ this.state.data.systemInfo }/>
-                {/* <ServiceStats /> */}
+                <ServiceStats cardId='systemd-services-overview'
+                              statusDescription='SystemD services that need to be running.'
+                              statusName='SystemD Services Overiew'
+                              servicesInfo={ this.state.data.sysd }/>
             </div>
         );
     };

@@ -1,18 +1,21 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import SubmitBtn from '../Buttons/Submit';
+import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import axios from 'axios';
+import { Alert } from 'reactstrap';
 
 class VpnForm extends React.Component{
     constructor() {
         super();
 
         this.state = {
-                ipaddr : '',
-                certAuth : '',
-                certificate : '',
-                keyCert : '',
-                tlsAuth : ''
+              ipaddr : '',
+              ca : '',
+              cert : '',
+              key : '',
+              ta : '',
+              formAlert: ''
             };
         this.submitData = this.submitData.bind(this);
     }
@@ -20,7 +23,10 @@ class VpnForm extends React.Component{
     submitData(e) {
         e.preventDefault();
         axios.post('http://localhost:3001/vpn', this.state
-        ).then(res => console.log(res.data)).catch(console.log);
+        ).then(res => {
+            this.sendAlert(res)
+            this.refreshComponents(e);
+        }).catch(console.log);
     };
 
     inputSetState = (key, value) => {
@@ -28,8 +34,28 @@ class VpnForm extends React.Component{
 
     };
 
+    refreshComponents = (e) => {
+        this.setState((prevState) => ({ipaddr: ''}));
+        this.setState((prevState) => ({ca: ''}));
+        this.setState((prevState) => ({cert: ''}));
+        this.setState((prevState) => ({key: ''}));
+        this.setState((prevState) => ({ta: ''}));
+        setTimeout(()=>{
+            this.setState((prevState)=> ({formAlert: ''}));
+          }, 3000);
+    }
+
+    sendAlert(res){
+        if (res.data.response === 'Firehol is complete....'){
+          this.setState({formAlert: <Alert color="success">Submission Accepted</Alert>}) 
+        } else {
+          this.setState({formAlert: <Alert color="danger">Something went wrong, please consult the manual...</Alert>})
+        };
+      }
+
     render() {
         return(
+
             <form onSubmit={this.submitData}>
                 <Container className="mt-2">
                     <Row>
@@ -45,25 +71,25 @@ class VpnForm extends React.Component{
                                     <br />
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">CA</InputGroupAddon>
-                                        <Input value={this.state.certAuth} onChange={(e)=>this.inputSetState('certAuth', e.target.value)} placeholder="server.ca" />
+                                        <Input type="textarea" value={this.state.ca} onChange={(e)=>this.inputSetState('ca', e.target.value)} placeholder="server.ca" />
                                     </InputGroup>
                                     <br />
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">Cert</InputGroupAddon>
-                                        <Input value={this.state.certificate} onChange={(e)=>this.inputSetState('certificate', e.target.value)} placeholder="branch-location.crt" />
+                                        <Input type="textarea" value={this.state.cert} onChange={(e)=>this.inputSetState('cert', e.target.value)} placeholder="branch-location.crt" />
                                     </InputGroup>
                                     <br />
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">Key</InputGroupAddon>
-                                        <Input value={this.state.keyCert} onChange={(e)=>this.inputSetState('keyCert', e.target.value)} placeholder="branch-location.key" />
+                                        <Input type="textarea" value={this.state.key} onChange={(e)=>this.inputSetState('key', e.target.value)} placeholder="branch-location.key" />
                                     </InputGroup>
                                     <br />
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">TLS-Key</InputGroupAddon>
-                                        <Input value={this.state.tlsAuth} onChange={(e)=>this.inputSetState('tlsAuth', e.target.value)} placeholder="server.ta" />
+                                        <Input type="textarea" value={this.state.ta} onChange={(e)=>this.inputSetState('ta', e.target.value)} placeholder="server.ta" />
                                     </InputGroup>
                                     <br />
-                                    <button type="submit">Submit</button>
+                                    <SubmitBtn/>
                                 </CardBody>
                             </Card>
                         </Col>

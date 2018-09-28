@@ -12,7 +12,7 @@ import {
     CardTitle
  } from 'reactstrap';
 
- const DeviceStatusCard = ({cardId, statusName, statusDescription, interfaceInfo, deviceInfo}) => {
+ const DeviceStatus = ({cardId, statusName, statusDescription, interfaceInfo, deviceInfo}) => {
     const interfaces = interfaceInfo[0]
 
     const rows = Object.keys(interfaces).map((interfaceName)=>{
@@ -31,7 +31,6 @@ import {
                                 <CardTitle >{ statusName }</CardTitle>
                                 <CardText>{ statusDescription }</CardText>
                                 <NetInfo rows={ rows } />
-                                <br/>
                                 <DeviceInfo sysInfo={ deviceInfo }/>
                             </CardBody>
                         </Card>
@@ -41,4 +40,4 @@ import {
     );
  }
 
- export default DeviceStatusCard;
+ export default DeviceStatus;
