@@ -42,15 +42,17 @@ class VpnForm extends React.Component{
         this.setState((prevState) => ({ta: ''}));
         setTimeout(()=>{
             this.setState((prevState)=> ({formAlert: ''}));
-          }, 3000);
+          }, 4000);
     }
 
     sendAlert(res){
-        if (res.data.response === 'Firehol is complete....'){
-          this.setState({formAlert: <Alert color="success">Submission Accepted</Alert>}) 
-        } else {
-          this.setState({formAlert: <Alert color="danger">Something went wrong, please consult the manual...</Alert>})
-        };
+        if (res.data.response === 'Form is complete....'){
+          this.setState({formAlert: 
+            <Col sm="12" md={{ size: 8, offset: 2 }}><Alert color="success">Submission Accepted</Alert></Col>}) 
+          } else {
+            this.setState({formAlert: 
+            <Col sm="12" md={{ size: 8, offset: 2 }}><Alert color="danger">Something went wrong, please consult the manual...</Alert></Col>})
+          };
       }
 
     render() {

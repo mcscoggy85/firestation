@@ -41,14 +41,16 @@ class FirewallForm extends React.Component {
       this.setState((prevState) => ({openVpnIP: ''}));
       setTimeout(()=>{
         this.setState((prevState)=> ({formAlert: ''}));
-      }, 3000);
+      }, 4000);
     }
 
     sendAlert(res){
       if (res.data.response === 'Firehol is complete....'){
-        this.setState({formAlert: <Alert color="success">Submission Accepted</Alert>}) 
+        this.setState({formAlert: 
+        <Col sm="12" md={{ size: 8, offset: 2 }}><Alert color="success">Submission Accepted</Alert></Col>}) 
       } else {
-        this.setState({formAlert: <Alert color="danger">Something went wrong, please consult the manual...</Alert>})
+        this.setState({formAlert: 
+        <Col sm="12" md={{ size: 8, offset: 2 }}><Alert color="danger">Something went wrong, please consult the manual...</Alert></Col>})
       };
     }
 
