@@ -4,11 +4,7 @@ import NavFire from './components/Navigation/Nav.js';
 import Stats from './components/StatusWindow/StatusWindow.js';
 import VpnForm from './components/VpnForm/VpnForm.js';
 import FirewallForm from './components/FirewallForm/FirewallForm';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const FirestationRoutes = () => {
   return(
