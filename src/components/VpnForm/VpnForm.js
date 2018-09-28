@@ -55,7 +55,7 @@ class VpnForm extends React.Component{
 
     render() {
         return(
-
+          <div>
             <form onSubmit={this.submitData}>
                 <Container className="mt-2">
                     <Row>
@@ -96,9 +96,11 @@ class VpnForm extends React.Component{
                     </Row>
                 </Container>
             </form>
+            <br/>
+            {this.state.formAlert}
+          </div>
         );
-    }
-
-}
+    };
+};
 
 export default VpnForm;

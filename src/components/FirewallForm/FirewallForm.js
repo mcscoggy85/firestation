@@ -90,11 +90,11 @@ class FirewallForm extends React.Component {
                     </Row>
                 </Container>
             </form>
+            <br/>
             {this.state.formAlert}
           </div>
         );
-    }
-
+    };
 };
 
 export default FirewallForm;
