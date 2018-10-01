@@ -3,7 +3,9 @@ import './stylesheets/App.css';
 import NavFire from './components/Navigation/Nav.js';
 import Stats from './components/StatusWindow/StatusWindow.js';
 import VpnForm from './components/VpnForm/VpnForm.js';
+import VpnLogs from './components/VpnLogs/Logs';
 import FirewallForm from './components/FirewallForm/FirewallForm';
+import FWLogs from './components/FirewallLogs/Logs';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const FirestationRoutes = () => {
@@ -13,9 +15,9 @@ const FirestationRoutes = () => {
         <Route exact path='/' component={Stats} />
         <Route path='/status' component={Stats} />
         <Route path='/vpn/form' component={VpnForm} />
-        {/* <Route path='/vpn/logs' component={VpnForm} /> */}
+        <Route path='/vpn/logs' component={VpnLogs} />
         <Route path='/firewall/form' component={FirewallForm} />
-        {/* <Route path='/firewall/logs' component={VpnForm} /> */}
+        <Route path='/firewall/logs' component={FWLogs} />
       </div>
     </Router>
   );

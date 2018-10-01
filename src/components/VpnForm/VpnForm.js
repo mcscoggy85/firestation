@@ -1,7 +1,7 @@
 import React from 'react';
 import SubmitBtn from '../Buttons/Submit';
 import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
 import axios from 'axios';
 import { Alert } from 'reactstrap';
 
@@ -62,10 +62,12 @@ class VpnForm extends React.Component{
                 <Container className="mt-2">
                     <Row>
                         <Col lg="8">
-                            <Card>
-                                <CardBody>
+                            <Card body inverse color='secondary'>
+                                <CardHeader>
                                     <CardTitle >VPN Form</CardTitle>
                                     <CardText>Below enter in the correct keys and certificates provided from the OpenVPN Server</CardText>
+                                </CardHeader>
+                                <CardBody>
                                     <InputGroup>
                                         <InputGroupAddon addonType="prepend">IP Address</InputGroupAddon>
                                         <Input value={this.state.ipaddr} onChange={(e)=>this.inputSetState('ipaddr', e.target.value)} placeholder="Server IP...." />

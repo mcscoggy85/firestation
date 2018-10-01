@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 
 const SubmitBtn = () => {
     return(
-        <Button type='Submit'>Submit</Button>
+        <Button color='success' type='Submit'>Submit</Button>
     );
 };
 
