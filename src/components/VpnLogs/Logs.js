@@ -8,12 +8,36 @@ class VpnLogs extends React.Component {
         super();
 
         this.state = {
-            data: '',
+            statusLog: '',
+            vpnLog: '',
             ready: false
         };
     };
+
+    getLogs(){
+        axios.get('http://localhost:3001/status').
+        then((response) => {
+            const vpnStatusData = response.data.logs.openvpn.stats
+            const vpnLogData = response.data.logs.openvpn.logs
+            
+            this.setState({
+                statusLog: vpnStatusData, 
+                vpnLog: vpnLogData, 
+                ready: true});
+
+            // console.log(this.state.statusLog);
+            // console.log(this.state.vpnLog);
+
+        }).catch((err) => console.log(err));
+    }
+
+    componentDidMount(){
+        this.getLogs();
+    }
     
     render() {
+        const { statusLog, vpnLog } = this.state;
+
         if (!this.state.ready){
             return(
                 <Row>
@@ -27,7 +51,13 @@ class VpnLogs extends React.Component {
             );
         };
         return(
-            <div></div>
+            <div>
+                <VpnLogCard 
+                    openVpnStatus={ statusLog } 
+                    openVpnLogs={ vpnLog }
+                    openVpnStatusTitle={ 'OpenVpn Status Logs' }
+                />
+            </div>
         );
     };
     
