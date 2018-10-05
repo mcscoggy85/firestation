@@ -18,7 +18,9 @@ class Stats extends React.Component {
     serverData = () => {
         axios.get('http://localhost:3001/status')
             .then(res => {
-                this.setState({data : res.data, ready : true}, () => console.log(this.state.data));
+                this.setState({
+                  data : res.data, 
+                  ready : true});
             }).catch(err => console.log(err));
     };
 

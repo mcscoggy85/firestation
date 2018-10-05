@@ -8,15 +8,15 @@ const RunningServices = (props) => {
     let vpnStatus;
 
     if (!props.servicesInfo.firewall.on) {
-        fwStatus = <td><img src={'../../../../../images/status-off.png'}/></td>
+        fwStatus = <td><img alt={'fw-not-running'} src={'../../../../../images/status-off.png'}/></td>
     } else {
-        fwStatus = <td><img src={'../../../../../images/status-on.png'}/></td>
+        fwStatus = <td><img alt={'fw-running'} src={'../../../../../images/status-on.png'}/></td>
     };
 
     if (!props.servicesInfo.vpnStatus.on) {
-        vpnStatus = <td><img src={'../../../../../images/status-off.png'}/></td>
+        vpnStatus = <td><img alt={'vpn-not-running'}src={'../../../../../images/status-off.png'}/></td>
     } else {
-        vpnStatus = <td><img src={'../../../../../images/status-on.png'}/></td>
+        vpnStatus = <td><img alt={'vpn-running'} src={'../../../../../images/status-on.png'}/></td>
     };
 
     return(

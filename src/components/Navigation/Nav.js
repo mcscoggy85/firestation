@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
@@ -30,8 +30,12 @@ export default class NavFire extends React.Component {
                             <NavItem className="mt-2">
                               <UncontrolledDropdown>
                                 <DropdownToggle>
-                                  <NavLink style={{"color": "white"}} href="/status">Status</NavLink>                                  
+                                  Status
                                 </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem href="/status">Device Status</DropdownItem>
+                                    <DropdownItem href="/status/logs">Device Logs</DropdownItem>
+                                  </DropdownMenu>
                               </UncontrolledDropdown>
                             </NavItem>
                             <NavItem className="mt-2">

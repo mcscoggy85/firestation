@@ -14,8 +14,8 @@ class FWLogs extends React.Component {
 
     };
     getLogs = () => {
-        axios.get('http://localhost:3001/status').
-        then(response => {
+        axios.get('http://localhost:3001/status')
+        .then(response => {
             this.setState({data: response.data, ready: true}, ()=> console.log(this.state.data));
             console.log(this.state.data.firehol.ipTables);
         }).catch(err => console.log(err));

@@ -15,19 +15,15 @@ class VpnLogs extends React.Component {
     };
 
     getLogs(){
-        axios.get('http://localhost:3001/status').
-        then((response) => {
-            const vpnStatusData = response.data.logs.openvpn.stats
-            const vpnLogData = response.data.logs.openvpn.logs
+        axios.get('http://localhost:3001/status')
+        .then((response) => {
+            const vpnStatusData = response.data.logs.openvpn.stats;
+            const vpnLogData = response.data.logs.openvpn.logs;
             
             this.setState({
                 statusLog: vpnStatusData, 
-                vpnLog: vpnLogData, 
+                vpnLog: vpnLogData,
                 ready: true});
-
-            // console.log(this.state.statusLog);
-            // console.log(this.state.vpnLog);
-
         }).catch((err) => console.log(err));
     }
 
