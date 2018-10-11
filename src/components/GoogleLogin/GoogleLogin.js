@@ -19,7 +19,7 @@ const responseGoogle = (response) => {
 
   axios.post('http://localhost:3001/login', state)
   .then(res => {
-    console.log(res);
+    localStorage.setItem('token', res.data.token);
   }).catch(e => console.log(e));
 };
 
