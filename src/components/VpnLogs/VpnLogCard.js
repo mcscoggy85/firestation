@@ -6,6 +6,7 @@ import {
     Card, 
     CardBody, 
     CardTitle,
+    CardHeader,
     Table } from 'reactstrap'
 import { CsvToHtmlTable } from 'react-csv-to-table';
 
@@ -23,7 +24,7 @@ const VpnLogCard = (props) => {
 
     return (
         <div>
-          <Container>
+          <Container fluid center >
             <Row>
               <Col>
                 <Card>
@@ -36,7 +37,9 @@ const VpnLogCard = (props) => {
                   </CardBody>
                 </Card>
                 <Card className='mt-2'>
-                  <CardTitle>OpenVpn Logs</CardTitle>
+                  <CardHeader>
+                    <CardTitle>OpenVpn Logs</CardTitle>
+                  </CardHeader>
                   <CardBody>
                       <Table>
                           <tbody>

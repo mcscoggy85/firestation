@@ -13,7 +13,7 @@ import {
 
 const ServicesStatus = ({cardId, statusName, statusDescription, servicesInfo}) => {
     return(
-        <Container id={ cardId } className='mt-2'>
+        <Container fluid id={ cardId } className='mt-2'>
             <Row>
                 <Col md='8'>
                     <Card>

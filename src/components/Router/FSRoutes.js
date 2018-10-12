@@ -6,116 +6,77 @@ import VpnLogs from '../VpnLogs/Logs';
 import FirewallForm from '../FirewallForm/FirewallForm';
 import FWLogs from '../FirewallLogs/Logs';
 import GoogleSignInCard from '../GoogleLogin/GoogleLogin';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import GoogleSignOutCard from '../GoogleLogout/GoogleSignOutCard';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import axios from 'axios';
+import { Alert } from 'reactstrap';
 
 
 class FirestationRoutes extends React.Component {
     constructor(){
         super();
-
         this.state = {
-            loginData : '',
-            logoutData : '',
-            ready: false,
-            user: {}
+            ready: false
         };
-        // this.responseGoogle = this.responseGoogle.bind(this);
-        // this.logout = this.logout.bind(this);
-        // this.Login = this.Login.bind(this);
-        // this.Logout = this.Logout.bind(this);
     };
 
-    // responseGoogle = (response) => {
-    //   const userInfo = response;
-    //   console.log(response);
-    //   console.log('USER-INFO',userInfo);
-    //   this.setState({
-    //       loginData: response,
-    //       ready: true,
-    //       // user : response
-    //   });
-    //   this.setState({
-    //     user: this.state.loginData.profileObj
-    //   });
-    //   console.log(this.state.user);
-
-    //   // axios.post('http://localhost:3001/home', this.state)
-    //   // .then(res => {
-    //   //   console.log(res);
-    //   // }).catch(e => console.error(e));
-
-    // };
-
-    // logout = () => {
-    //   this.setState({
-    //     loginData : '',
-    //     ready : false
-    //   });
-    //   console.log(this.state.ready);
-
-    //   // axios.post('http://localhost:3001/home', this.state)
-    //   // .then(res => {
-    //   //   console.log(res);
-    //   // }).catch(e => console.error(e));
-    // };
-    
-    // componentDidMount(){
-    //   this.responseGoogle();
-    // };
-
-    // Login(){
-    //   if (!this.state.ready){
-    //     return(
-    //       <GoogleLogin
-    //         clientId='933105496273-j3plqu9mnj4gcvng7arq45kmjvdi98iu.apps.googleusercontent.com'
-    //         buttonText='Login'
-    //         onSuccess={this.responseGoogle}
-    //         onFailure={this.responseGoogle}
-    //       />
-    //     );  
-    //   };
+    getLSTokenAndVerify = () => { 
+      const token = localStorage.getItem('token');
+      if (token !== null){
+        axios.post('http://localhost:3001/show-routes',token, {
+          headers: {'Authorization': `Bearer ${token}`}
+        }).then(res => {
+          if (
+            (res.data.message === 'Token is valid')
+            &&
+            (res.data.authData.exp > Date.now() / 1000)
+            ){
+              // console.log('POOP')
+              this.setState({ready: true})
+          }
+        }).catch(console.error);
+      } else {
+        console.log('Token has expired, please logout...')
+        this.setState({ready: false});
+        return(<Alert>Session Expired</Alert>)
+      }
       
-    //   return this.Logout();
-      
-    // };
+    };
 
-    // Logout(){
-    //   if (this.state.ready){
-    //     return(
-    //       <GoogleLogout
-    //         buttonText="Logout"
-    //         onLogoutSuccess={this.logout}
-    //       />
-    //     );
-    //   };
+    componentDidMount(){
+      // this.timer = setInterval(this.getLSTokenAndVerify, 3000);
+      this.getLSTokenAndVerify();
+    }
 
-    // }
+    componentWillUnmount(){
+      // this.timer;
+    }
 
-    render(){
-        // if (!this.state.ready) {
-        //     return(
-        //         <Router>
-        //           <Route exact path='/' component={Login} />
-        //         </Router>
-        //     );
-        // }
+    render(){     
 
+      if (!this.state.ready){
+        console.log(this.state.ready);
         return(
-            <Router>
-              <Switch>
-                <Route exact path='/' component={GoogleSignInCard} />
-                <Route exact path='/status' component={Stats} />
-                <Route exact path='/status/logs' component={SysLogs} />
-                <Route exact path='/vpn/form' component={VpnForm} />
-                <Route exact path='/vpn/logs' component={VpnLogs} />
-                <Route exact path='/firewall/form' component={FirewallForm} />
-                <Route exact path='/firewall/logs' component={FWLogs} />
-                {/* <Route path='*' component={} /> */}
-              </Switch>
-            </Router>
-          );
+          <Switch>
+            {/* <Redirect from='/' to='/sign-in'/> */}
+            <Route exact path='/' component={GoogleSignInCard} />                  
+          </Switch>
+        );
+      }
+      return(
+        <Router>
+          <Switch>
+            <Route exact path='/' component={GoogleSignOutCard} />
+            <Route exact path='/status' component={Stats} />
+            <Route exact path='/status/logs' component={SysLogs} />
+            <Route exact path='/vpn/form' component={VpnForm} />
+            <Route exact path='/vpn/logs' component={VpnLogs} />
+            <Route exact path='/firewall/form' component={FirewallForm} />
+            <Route exact path='/firewall/logs' component={FWLogs} />
+          </Switch>
+        </Router>
+      );
+    
     };
   };
 

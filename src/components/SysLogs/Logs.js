@@ -6,6 +6,7 @@ import {
     Card, 
     CardBody, 
     CardTitle,
+    CardHeader,
     Alert } from 'reactstrap';
 import axios from 'axios';
 import SysLogTable from '../FireStationTable/FSTables/DeviceLogs/SysLogInfo';
@@ -21,7 +22,9 @@ class SysLogs extends React.Component {
     };
 
     getLogs(){
-        axios.get('http://localhost:3001/status')
+        const token = localStorage.getItem('token');
+        axios.get('http://localhost:3001/status',
+        {headers: {'Authorization': `Bearer ${token}`}})
         .then((response) => {
             const syslogs = response.data;
             
@@ -54,11 +57,13 @@ class SysLogs extends React.Component {
 
       return(
         
-        <Container>
+        <Container fluid>
             <Row>
               <Col>
                 <Card className='mt-2'>
-                  <CardTitle>Syslog Data</CardTitle>
+                  <CardHeader>
+                    <CardTitle>Syslog Data</CardTitle>
+                  </CardHeader>
                   <CardBody>
                     <SysLogTable sysLogData={sysLogData}/>
                   </CardBody>

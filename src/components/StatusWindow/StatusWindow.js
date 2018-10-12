@@ -16,7 +16,9 @@ class Stats extends React.Component {
     };
 
     serverData = () => {
-        axios.get('http://localhost:3001/status')
+        const token = localStorage.getItem('token');
+        axios.get('http://localhost:3001/status',
+        {headers: {'Authorization': `Bearer ${token}`}})
             .then(res => {
                 this.setState({
                   data : res.data, 
@@ -25,8 +27,8 @@ class Stats extends React.Component {
     };
 
     componentDidMount() {
-        // this.timer = setInterval(this.serverData, 3000);
-        this.serverData();
+        this.timer = setInterval(this.serverData, 1000);
+        // this.serverData();
     };
 
     componentWillUnmount() {

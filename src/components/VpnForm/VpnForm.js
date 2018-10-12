@@ -22,7 +22,11 @@ class VpnForm extends React.Component{
 
     submitData(e) {
         e.preventDefault();
-        axios.post('http://localhost:3001/vpn', this.state
+        const token = localStorage.getItem('token');
+        axios.post('http://localhost:3001/vpn', this.state, 
+        {
+            headers: {'Authorization': `Bearer ${token}`}
+        }
         ).then(res => {
             this.sendAlert(res)
             this.refreshComponents(e);
@@ -59,7 +63,7 @@ class VpnForm extends React.Component{
         return(
           <div>
             <form onSubmit={this.submitData}>
-                <Container className="mt-2">
+                <Container fluid className="mt-2">
                     <Row>
                         <Col lg="8">
                             <Card body inverse color='secondary'>

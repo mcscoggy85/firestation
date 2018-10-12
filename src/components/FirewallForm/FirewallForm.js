@@ -27,18 +27,23 @@ class FirewallForm extends React.Component {
 
     submitData(e){
       e.preventDefault();
-      axios.post('http://localhost:3001/firewall', this.state).then(res => {
+      const token = localStorage.getItem('token');
+      axios.post('http://localhost:3001/firewall', this.state, 
+      {headers: {'Authorization': `Bearer ${token}`}}).then(res => {
           console.log(res.data);
           this.sendAlert(res);
           this.refreshComponents(e);
         }).catch(console.log);
     }
 
-    refreshComponents = (e) => {
-      this.setState((prevState) => ({localNets: ''}));
-      this.setState((prevState) => ({proxyNets: ''}));
-      this.setState((prevState) => ({localIP: ''}));
-      this.setState((prevState) => ({openVpnIP: ''}));
+    refreshComponents = () => {
+      this.setState({
+        localNets: '',
+        proxyNets: '',
+        localIP: '',
+        openVpnIP: ''
+      });
+      
       setTimeout(()=>{
         this.setState((prevState)=> ({formAlert: ''}));
       }, 4000);

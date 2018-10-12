@@ -22,7 +22,7 @@ import {
     });
 
     return (
-            <Container id={ cardId } className='statsCard mt-2'>
+            <Container fluid id={ cardId } className='statsCard mt-2'>
                 <Row>
                     <Col md="8">
                         <Card>

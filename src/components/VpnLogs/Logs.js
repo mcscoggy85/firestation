@@ -15,7 +15,9 @@ class VpnLogs extends React.Component {
     };
 
     getLogs(){
-        axios.get('http://localhost:3001/status')
+        const token = localStorage.getItem('token');
+        axios.get('http://localhost:3001/status', 
+        {headers: {'Authorization': `Bearer ${token}`}})
         .then((response) => {
             const vpnStatusData = response.data.logs.openvpn.stats;
             const vpnLogData = response.data.logs.openvpn.logs;

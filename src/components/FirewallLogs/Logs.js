@@ -14,7 +14,9 @@ class FWLogs extends React.Component {
 
     };
     getLogs = () => {
-        axios.get('http://localhost:3001/status')
+        const token = localStorage.getItem('token');
+        axios.get('http://localhost:3001/status',
+        {headers: {'Authorization': `Bearer ${token}`}})
         .then(response => {
             this.setState({data: response.data, ready: true}, ()=> console.log(this.state.data));
             console.log(this.state.data.firehol.ipTables);
@@ -24,7 +26,7 @@ class FWLogs extends React.Component {
 
     componentDidMount(){
         this.timer = setInterval(this.getLogs(),1000);
-        // this.getLogs();
+        this.getLogs();
     }
 
     componentWillUnmount(){
