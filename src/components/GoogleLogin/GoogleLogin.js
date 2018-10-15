@@ -37,7 +37,7 @@ const GoogleSignInCard = () => {
             </CardHeader>
             <CardBody>
               <GoogleLogin
-                clientId='933105496273-j3plqu9mnj4gcvng7arq45kmjvdi98iu.apps.googleusercontent.com'
+                clientId='<ENTER CLIENTID HERE>'
                 buttonText='Login'
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
